@@ -23,7 +23,7 @@ function loadElementHtml(element, url, callback = undefined) {
 }
 
 function takePicture() {
-  navigator.camera.getPicture(onPictureSuccess, onPictureFail, { quality: 100, destinationType: Camera.DestinationType.FILE_URI });
+  navigator.camera.getPicture(onPictureSuccess, onPictureFail, { quality: 100, destinationType: Camera.DestinationType.FILE_URI, sourceType: Camera.PictureSourceType.PHOTOLIBRARY });
 }
 
 function onPictureSuccess(imageURI) {
@@ -49,3 +49,10 @@ $$('#pictureButton').on('click', function (e) {
 		}
 	)
 });
+
+function translateText(text, langTo, callback) {
+	var yandexapikey = 'trnsl.1.1.20170408T133105Z.d4530df6647e87d9.b327f61621892a66e873914986f97f5262b2a08d';
+	$$.get('https://translate.yandex.net/api/v1.5/tr/translate?key=' + yandexapikey + '&text=' + text + '&lang=en-' + langTo, undefined, function (data) {
+		callback(data);
+	});
+}
