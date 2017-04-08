@@ -23,7 +23,7 @@ function loadElementHtml(element, url, callback = undefined) {
 }
 
 function takePicture() {
-  navigator.camera.getPicture(onPictureSuccess, onPictureFail, { quality: 100, destinationType: Camera.DestinationType.FILE_URI, sourceType: Camera.PictureSourceType.PHOTOLIBRARY });
+  navigator.camera.getPicture(onPictureSuccess, onPictureFail, { quality: 100, destinationType: Camera.DestinationType.FILE_URI, sourceType: Camera.PictureSourceType.CAMERA });
 }
 
 function onPictureSuccess(imageURI) {
