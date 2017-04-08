@@ -21,3 +21,31 @@ function loadElementHtml(element, url, callback = undefined) {
         if (typeof callback !== 'undefined') { callback(); }
     });
 }
+
+function takePicture() {
+  navigator.camera.getPicture(onPictureSuccess, onPictureFail, { quality: 100, destinationType: Camera.DestinationType.FILE_URI });
+}
+
+function onPictureSuccess(imageURI) {
+    $$('#resimg').attr('src', imageURI);
+}
+
+function onPictureFail(message) {
+    app.alert('There was an error attempting to scan the document.', 'Error');
+}
+
+$$('#pictureButton').on('click', function (e) {
+	$$('#glasses').transform('translateY(100px)');
+	$$('#glasses').transition(1000);
+	$$('#glasses').animate(
+		{
+	
+			'opacity': 1
+		},
+		{
+			duration: 700,
+			easing: 'linear'
+
+		}
+	)
+});

@@ -1,1 +1,67 @@
+#touchButton{
+	margin: 40%, 10%, 40%, 10%;
+	padding: 30px;
+	position: relative;
+	clear: both;
+}
 
+#glasses{
+	height: 36px; 
+	width: 123px;
+	position: relative;
+	clear: both;
+	z-index: 2;
+	opacity: 0;
+}
+
+#pictureButton{
+	height: 240px; 
+	width: 240px; 
+	border-radius: 100%;
+	position: relative;
+	clear: both;
+	margin-top: -40px;
+	z-index: 1;
+	transition: 1s;
+}
+
+.goGlasses{
+	animation: dropGlasses;
+	animation-timing-function: linear;
+	animation-duration: 1s;
+	animation-iteration-count: 1;
+	animation-fill-mode: forwards;
+	-webkit-animation: dropGlasses;
+	-webkit-animation-timing-function: linear;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-fill-mode: forwards;
+}
+
+@keyframes dropGlasses {
+	from { transform: translateY(-10px) };
+	to { transform: none };
+}
+
+@-webkit-keyframes dropGlasses {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+.goButton{
+	animation: dropButton;
+	animation-timing-function: linear;
+	animation-duration: 0.6s;
+	animation-iteration-count: 1;
+	animation-delay: 0.4s;
+	-webkit-animation: dropButton;
+	-webkit-animation-timing-function: linear;
+	-webkit-animation-duration: 0.6s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-delay: 0.4s;
+}
+
+@keyframes dropButton {
+	50% { transform: translateY(50px) };
+	100% { transform: none };
+}
