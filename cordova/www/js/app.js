@@ -1,5 +1,6 @@
 document.addEventListener('deviceready', onDeviceReady, false);
 document.addEventListener('backbutton', onBackKeyDown, false);
+var restext = '';
 
 //Device is ready
 function onDeviceReady() {
@@ -8,7 +9,7 @@ function onDeviceReady() {
 
 //Handle android back key
 function onBackKeyDown() {
-    mainView.router.back();
+	mainView.router.back();
 }
 
 //Load the contents of the drawer
@@ -16,37 +17,50 @@ loadElementHtml('#drawer', 'draweritems.html', undefined);
 
 //Load the contents of the url into the specified id
 function loadElementHtml(element, url, callback = undefined) {
-    $$.get(url, undefined, function (data) {
-        $$(element).html(data);
-        if (typeof callback !== 'undefined') { callback(); }
-    });
+	$$.get(url, undefined, function (data) {
+		$$(element).html(data);
+		if (typeof callback !== 'undefined') { callback(); }
+	});
 }
 
+app.onPageInit('results', function (page) {
+	$$('#resmsg').html(restext);
+})
+
 function takePicture() {
-  navigator.camera.getPicture(onPictureSuccess, onPictureFail, { quality: 100, destinationType: Camera.DestinationType.FILE_URI, sourceType: Camera.PictureSourceType.CAMERA });
+	navigator.camera.getPicture(onPictureSuccess, onPictureFail, { quality: 100, destinationType: Camera.DestinationType.FILE_URI, sourceType: Camera.PictureSourceType.CAMERA });
 }
 
 function onPictureSuccess(imageURI) {
-    $$('#resimg').attr('src', imageURI);
+	$$('body').animate({'opacity': 1},{duration: 700,easing: 'linear'});
+	$$('#glasses').animate({'opacity': 0},{duration: 0,easing: 'linear'});
+	app.showIndicator();
+	getTextFromImage(imageURI, function (txtFromImage) {
+		summarizeText(txtFromImage, function (sumText) {
+			restext = sumText;
+			app.hideIndicator();
+			mainView.router.loadPage('pages/results.html');
+		});
+	});
 }
 
 function onPictureFail(message) {
-    app.alert('There was an error attempting to scan the document.', 'Error');
+	app.alert('There was an error attempting to scan the document.', 'Error');
 }
 
 $$('#pictureButton').on('click', function (e) {
 	$$('#glasses').transform('translateY(100px)');
 	$$('#glasses').transition(1000);
 	$$('#glasses').animate(
-		{
-	
-			'opacity': 1
-		},
-		{
-			duration: 700,
-			easing: 'linear'
+	{
 
-		}
+		'opacity': 1
+	},
+	{
+		duration: 700,
+		easing: 'linear'
+
+	}
 	)
 	setInterval(function(){
 		$$('body').animate(
@@ -59,6 +73,8 @@ $$('#pictureButton').on('click', function (e) {
 		}
 		)
 	}, 1000);
+	setInterval(takePicture(), 1250);
+
 	
 });
 
@@ -67,4 +83,33 @@ function translateText(text, langTo, callback) {
 	$$.get('https://translate.yandex.net/api/v1.5/tr/translate?key=' + yandexapikey + '&text=' + text + '&lang=en-' + langTo, undefined, function (data) {
 		callback(data);
 	});
+}
+
+function getTextFromImage(imageURI, callback) {
+	Tesseract.recognize(myImage).then(function(result){callback(result.text)});
+}
+
+function summarizeText(text, callback) {
+	var summarizer = new JsSummarize();
+	var summary = summarizer.summarize(text);
+	var sr = ""
+	summary.forEach(function(sentence)
+	{
+		sr.append(sentence+" ");
+	});
+	callback(sr);
+}
+
+function translateResult() {
+	app.showIndicator();
+	translateText(restext, $$('#langsel').val(), function (tres) {
+		$$('#trmsg').html(tres);
+		app.hideIndicator();
+	});
+}
+
+function clearResults() {
+	$$('#resmsg').html('');
+	$$('#trmsg').html('');
+	app.alert('Results successfully cleared!', 'Clear Success');
 }

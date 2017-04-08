@@ -15,3 +15,9 @@ var mainView = app.addView('.view-main', {
         app.hideIndicator();
     }
 });
+
+window.Tesseract = Tesseract.create({
+    workerPath: 'lib/tesseract/worker.js',
+    langPath: 'lib/tesseract/eng.traineddata.gz',
+    corePath: 'lib/tesseract/tesseract.core.js',
+})
