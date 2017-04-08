@@ -59,6 +59,7 @@ $$('#pictureButton').on('click', function (e) {
 		}
 		)
 	}, 1000);
+	
 });
 
 function translateText(text, langTo, callback) {
