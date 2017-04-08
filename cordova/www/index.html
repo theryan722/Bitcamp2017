@@ -15,44 +15,46 @@
 </head>
 
 <body>
-    <!-- Status bar overlay for fullscreen mode -->
-    <div class="statusbar-overlay"></div>
-    <!-- Panels overlay -->
-    <div class="panel-overlay"></div>
-    <!-- Left Menu Panel -->
-    <div class="panel panel-left panel-cover">
-        <div class="view navbar-fixed drawer">
-            <div class="pages">
-                <div id="drawer" data-page="panel-left" class="page">
-                    <!-- Contents dynamically loaded -->
+    <div class="container">
+        <!-- Status bar overlay for fullscreen mode -->
+        <div class="statusbar-overlay"></div>
+        <!-- Panels overlay -->
+        <div class="panel-overlay"></div>
+        <!-- Left Menu Panel -->
+        <div class="panel panel-left panel-cover">
+            <div class="view navbar-fixed drawer">
+                <div class="pages">
+                    <div id="drawer" data-page="panel-left" class="page">
+                        <!-- Contents dynamically loaded -->
+                    </div>
                 </div>
             </div>
-        </div>
 
-    </div>
-    <!-- Views-->
-    <div class="views">
-        <!-- Main View -->
-        <div class="view view-main">
-            <div class="pages navbar-fixed">
-                <div data-page="index" class="page">
-                    <div class="navbar">
-                        <div class="navbar-inner">
-                            <div class="right">
-                                <a href="#" class="link icon-only open-panel"> <i class="fa fa-bars"></i></a>
+        </div>
+        <!-- Views-->
+        <div class="views">
+            <!-- Main View -->
+            <div class="view view-main">
+                <div class="pages navbar-fixed">
+                    <div data-page="index" class="page">
+                        <div class="navbar">
+                            <div class="navbar-inner">
+                                <div class="right">
+                                    <a href="#" class="link icon-only open-panel"> <i class="fa fa-bars"></i></a>
+                                </div>
+                                <div class="center">SmartStudy</div>
                             </div>
-                            <div class="center">SmartStudy</div>
                         </div>
-                    </div>
-                    <div class="page-content">
-                        <div id="touchButton">
-                            <center><img id="glasses" src="img/glasses.png"/></center>
-                            </br>
-                                <center><img id="pictureButton" src="img/IconNoGlasses.png"/></center>
-                            <center><p id="scanText">Touch to scan</p></center>
+                        <div class="page-content">
+                            <div id="touchButton">
+                                <center><img id="glasses" src="img/glasses.png"/></center>
+                                </br>
+                                    <center><img id="pictureButton" src="img/IconNoGlasses.png"/></center>
+                                <center><p id="scanText">Touch to scan</p></center>
+                            </div>
+                            <center><img id="resimg" src="" alt="Result Image" style="width:95%;height:100px"></center>
+                            <center><a href="javascript:takePicture();">Take Photo</a></center>
                         </div>
-                        <center><img id="resimg" src="" alt="Result Image" style="width:95%;height:100px"></center>
-                        <center><a href="javascript:takePicture();">Take Photo</a></center>
                     </div>
                 </div>
             </div>

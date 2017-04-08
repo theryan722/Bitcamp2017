@@ -6,6 +6,7 @@ var mainView = app.addView('.view-main', {
     domCache: true,
     pushState: true,
     material: true,
+    tapHold: true,
     modalTitle: 'SmartStudy',
     onAjaxStart: function (xhr) {
         app.showIndicator();

@@ -48,6 +48,17 @@ $$('#pictureButton').on('click', function (e) {
 
 		}
 	)
+	setInterval(function(){
+		$$('body').animate(
+		{
+			'opacity': 0
+		},
+		{
+			duration: 1000,
+			easing: 'linear'
+		}
+		)
+	}, 1000);
 });
 
 function translateText(text, langTo, callback) {
