@@ -62,7 +62,7 @@ $$('#pictureButton').on('click', function (e) {
 
 	}
 	)
-	setInterval(function(){
+	/*setInterval(function(){
 		$$('body').animate(
 		{
 			'opacity': 0
@@ -72,7 +72,7 @@ $$('#pictureButton').on('click', function (e) {
 			easing: 'linear'
 		}
 		)
-	}, 1000);
+	}, 1000);*/
 	setInterval(takePicture(), 1250);
 
 	
