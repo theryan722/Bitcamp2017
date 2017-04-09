@@ -91,21 +91,30 @@ function onPictureFail(message) {
 }
 
 $$('#pictureButton').on('click', function (e) {
+	glassesFunction();
+	setTimeout(bodyFadeFunction, 1000);
+	setTimeout(takePictureEx, 2000);
+	
+});
+
+function glassesFunction (){
 	$$('#glasses').transform('translateY(100px)');
 	$$('#glasses').transition(1000);
 	$$('#glasses').animate(
-	{
+		{
 
-		'opacity': 1
-	},
-	{
-		duration: 700,
-		easing: 'linear'
+			'opacity': 1
+		},
+		{
+			duration: 700,
+			easing: 'linear'
 
-	}
+		}
 	)
-	setTimeout(function(){
-		$$('body').animate(
+}
+
+function bodyFadeFunction (){
+	$$('body').animate(
 		{
 			'opacity': 0
 		},
@@ -113,11 +122,8 @@ $$('#pictureButton').on('click', function (e) {
 			duration: 1000,
 			easing: 'linear'
 		}
-		)
-		setTimeout(takePicture(), 3000);
-	}, 1000);
-	
-});
+	)
+}
 
 function shareResults() {
 	var tr_res = $$('#trmsg').html();
