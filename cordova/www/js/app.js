@@ -107,7 +107,7 @@ function onPictureFail(message) {
 $$('#pictureButton').on('click', function (e) {
 	glassesFunction();
 	setTimeout(bodyFadeFunction, 1000);
-	setTimeout(takePictureEx, 2000);
+	setTimeout(takePicture, 2000);
 	
 });
 
