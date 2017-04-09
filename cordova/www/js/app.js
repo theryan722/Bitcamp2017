@@ -49,6 +49,20 @@ function takeFromGallery() {
 	$$('#glasses').animate({'opacity': 0},{duration: 0,easing: 'linear'});
 }
 
+function takeFromText() {
+	var manualtext = $$('#mantxt').val();
+	if (manualtext !== '') {
+		app.showIndicator();
+		$$('body').animate({'opacity': 1},{duration: 700,easing: 'linear'});
+		$$('#glasses').animate({'opacity': 0},{duration: 0,easing: 'linear'});
+		summarizeText(manualtext, function (sumText) {
+			restext = sumText;
+			app.hideIndicator();
+			mainView.router.loadPage('pages/results.html');
+		});
+	}
+}
+
 function takePictureEx() {
 	$$('body').animate({'opacity': 1},{duration: 700,easing: 'linear'});
 	$$('#glasses').animate({'opacity': 0},{duration: 0,easing: 'linear'});

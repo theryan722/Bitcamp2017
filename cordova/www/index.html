@@ -51,7 +51,20 @@
                             </br>
                             <center><img id="pictureButton" src="img/IconNoGlasses.png"/></center>
                             <center><p id="scanText">Touch to scan</p></center>
-                            <center><p><a href="javascript:takeFromGallery();" class="button active">Pick from gallery</a></p></center>
+                            <center><p><a href="javascript:takeFromGallery();" class="button active"><i class="fa fa-picture-o"></i> Or pick from gallery</a></p></center>
+                            <div class="content-block-title"><center><i class="fa fa-file-text"></i>  Or insert manually</center></div>
+                            <div class="list-block">
+                                <ul>
+                                    <div class="item-content">
+                                        <div class="item-inner">
+                                            <div class="item-input">
+                                                <textarea id="mantxt"></textarea>
+                                            </div>
+                                            <p><a href="javascript:takeFromText();" class="button">Submit</a></p>
+                                        </div>
+                                    </div>
+                                </ul>
+                            </div>
                            <center> <img id="image" onLoad="imgLoaded()" src="" style="display: none;"/></center>
                             <canvas id="canvas" class="border" style="display: none;">no canvas supported</canvas>
                         </div>
