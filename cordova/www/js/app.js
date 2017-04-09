@@ -109,9 +109,7 @@ $$('#pictureButton').on('click', function (e) {
 		}
 		)
 	}, 1000);
-	setTimeout(takePictureEx(), 3000);
-
-	
+	setTimeout(takePicture(), 3000);
 });
 
 function shareResults() {

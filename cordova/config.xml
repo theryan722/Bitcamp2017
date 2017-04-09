@@ -16,6 +16,8 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <allow-intent href="http.cors.enabled: true" />
+    <allow-intent href="http.cors.allow-origin: *"/>
     <platform name="android">
         <allow-intent href="market:*" />
     </platform>
