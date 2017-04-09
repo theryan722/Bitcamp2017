@@ -43,6 +43,12 @@ function takePicture() {
 	$$('#glasses').animate({'opacity': 0},{duration: 0,easing: 'linear'});
 }
 
+function takeFromGallery() {
+	navigator.camera.getPicture(setOCRPicture, onPictureFail, { quality: 100, destinationType: Camera.DestinationType.FILE_URI, sourceType: Camera.PictureSourceType.PHOTOLIBRARY });
+	$$('body').animate({'opacity': 1},{duration: 700,easing: 'linear'});
+	$$('#glasses').animate({'opacity': 0},{duration: 0,easing: 'linear'});
+}
+
 function takePictureEx() {
 	$$('body').animate({'opacity': 1},{duration: 700,easing: 'linear'});
 	$$('#glasses').animate({'opacity': 0},{duration: 0,easing: 'linear'});
@@ -108,8 +114,9 @@ $$('#pictureButton').on('click', function (e) {
 			easing: 'linear'
 		}
 		)
+		setTimeout(takePicture(), 3000);
 	}, 1000);
-	setTimeout(takePicture(), 3000);
+	
 });
 
 function shareResults() {
