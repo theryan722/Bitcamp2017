@@ -27,6 +27,16 @@ app.onPageInit('results', function (page) {
 	$$('#resmsg').html(restext);
 })
 
+app.onPageInit('history', function (page) {
+	var htm = '';
+	var arr = JSON.parse(localStorage.getItem('history'));
+	for (var i = 0; i < arr.length; i++) {
+		htm += '<p>' + arr[i] + '</p>';
+	}
+
+	$$('#hismsg').html(htm);
+})
+
 function takePicture() {
 	navigator.camera.getPicture(setOCRPicture, onPictureFail, { quality: 100, destinationType: Camera.DestinationType.FILE_URI, sourceType: Camera.PictureSourceType.CAMERA });
 	$$('body').animate({'opacity': 1},{duration: 700,easing: 'linear'});
@@ -99,14 +109,20 @@ $$('#pictureButton').on('click', function (e) {
 		}
 		)
 	}, 1000);
-	setTimeout(function(){
-		$$('body').animate({'opacity': 1},{duration: 1000, easing: 'linear'});
-		$$('#glasses').animate({'opacity': 1},{duration: 1000, easing: 'linear'});
-	}, 3000);
 	setTimeout(takePictureEx(), 3000);
 
 	
 });
+
+function shareResults() {
+	var tr_res = $$('#trmsg').html();
+	if (tr_res === '') {
+		window.plugins.socialsharing.share($$('#resmsg').html(), 'SmartScanner', '', '');
+	} else {
+		window.plugins.socialsharing.share($$('#trmsg').html(), 'SmartScanner', '', '');
+	}
+	
+}
 
 function translateText(text, langTo, callback) {
 	var yandexapikey = 'trnsl.1.1.20170408T133105Z.d4530df6647e87d9.b327f61621892a66e873914986f97f5262b2a08d';
@@ -120,27 +136,44 @@ function getTextFromImage(myImage, callback) {
 	callback(strres);
 }
 
+function clearHistory() {
+	localStorage.setItem('history', '[]');
+	$$('#hismsg').html('');
+	app.alert('Successfully cleared history!', 'History Cleared');
+}
+
 function summarizeText(stext, callback) {
 	var summarizer = new JsSummarize();
 	var summary = summarizer.summarize('', stext);
 	var sr = "";
-		summary.forEach(function(sentence)
+	summary.forEach(function(sentence)
 	{
 		sr += sentence + " ";
 	});
+	var s1 = localStorage.getItem('history');
+	var s2 = JSON.parse(s1);
+	if (s2) {
+		s2.push(sr);
+	} else {
+		s2 = ['sr'];
+	}
+	localStorage.setItem('history', JSON.stringify(s2));
 	callback(sr);
 }
 
 function translateResult() {
 	app.showIndicator();
-	translateText(restext, $$('#langsel').val(), function (tres) {
+	if (restext != '') {
+		translateText(restext, $$('#langsel').val(), function (tres) {
 		$$('#trmsg').html(tres);
 		app.hideIndicator();
 	});
+	}
 }
 
 function clearResults() {
 	$$('#resmsg').html('');
 	$$('#trmsg').html('');
+	restext = '';
 	app.alert('Results successfully cleared!', 'Clear Success');
 }
